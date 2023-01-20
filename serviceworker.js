@@ -92,7 +92,7 @@ chrome.runtime.onConnect.addListener( port => {
         console.log(`-------- >>> Highlander has been started at ${convertNoDate(Date.now())}`);
     } else {
         const next = nextSeconds*SECONDS - (Date.now() - lastCall);
-        console.log(`***** Highlander is already running. Next ROUND in ${convertNoDate(nextSeconds*SECONDS - (Date.now() - lastCall))} ( ${next/1000 | 0} seconds )`);
+        console.log(`***** Highlander is already running. Next ROUND in ${convertNoDate(next)} ( ${next/1000 | 0} seconds )`);
     }
 
     port.onDisconnect.addListener( (port) => {
