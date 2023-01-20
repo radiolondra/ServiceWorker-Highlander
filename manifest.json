@@ -1,0 +1,34 @@
+{
+	"manifest_version": 3,
+	"name": "Highlander Test Extension",
+	"description": "Service Worker awakened once stays alive forever",
+	"version": "0.1",
+	"icons": {
+		"512": "icon.png"
+	},
+	"background": {
+		"service_worker": "serviceworker.js"
+	},
+	"action": {
+		"default_icon": {
+			"16": "icon.png"
+		}
+	},
+
+	"content_scripts": [
+		{
+		  "matches": [ "*://*/*" ],
+		  "js": [        
+			"scriptcontent.js"
+		  ],
+		  "run_at": "document_start"
+		}
+	],
+
+	"host_permissions": [
+		"<all_urls>"
+	],
+
+	"permissions": [
+	]
+}
