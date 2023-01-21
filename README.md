@@ -2,7 +2,7 @@
 MV3 Extension: Service Worker awakened once stays alive forever.
   
 ### NOTE
-For the version that produces the same result without any external intervention see [**Service Worker Highlander-DNA**](https://github.com/radiolondra/ServiceWorker-Highlander-DNA).
+For the version that produces the same result but **without any external intervention** see [**Service Worker Highlander-DNA**](https://github.com/radiolondra/ServiceWorker-Highlander-DNA).
   
 ### What is this?  
 This is a Chromium extension to demonstrate how a service worker can be activated by a content script and manages to keep itself active forever (RUNNING state), without any other external intervention.  
