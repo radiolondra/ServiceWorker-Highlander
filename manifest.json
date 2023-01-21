@@ -12,13 +12,21 @@
 	"action": {
 		"default_icon": {
 			"16": "icon.png"
-		}
+		},
+		"default_title": "Highlander Test",
+    	"default_popup": "popup.html"
 	},
+
+	"options_ui": {
+		"page": "options.html",
+		"open_in_tab": true
+	  },
 
 	"content_scripts": [
 		{
 		  "matches": [ "*://*/*" ],
-		  "js": [        
+		  "js": [
+			"commonscript.js",
 			"scriptcontent.js"
 		  ],
 		  "run_at": "document_start"
@@ -28,6 +36,10 @@
 	"host_permissions": [
 		"<all_urls>"
 	],
+
+	"content_security_policy": {
+		"extension_pages": "script-src 'self'; object-src 'self'"
+	},
 
 	"permissions": [
 	]

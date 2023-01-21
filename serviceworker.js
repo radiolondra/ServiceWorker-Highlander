@@ -104,7 +104,7 @@ chrome.runtime.onConnect.addListener( port => {
     });
 
     // Disconnect the port connected with content script. 
-    // It is useless as Service Worker will continue to stay awake because of running Highlander function.
+    // Connection is useless as Service Worker will continue to stay awake because of running Highlander function.
     setTimeout(swDisconnect, 2000, port);
     
 });
