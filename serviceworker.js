@@ -6,22 +6,22 @@ console.log(`-------- >>> ${convertNoDate(Date.now())} UTC - Service Worker with
 
 const INTERNAL_TESTALIVE_PORT = "CT_Internal_alive_test";
 const INTERNAL_TESTAWAKE_PORT = "CT_Internal_awake_test";
-const startSeconds = 1;
-const nextSeconds = 270;
+
+//const startSeconds = 1;
+const nextSeconds = 25;
 const SECONDS = 1000;
 
 var alivePort = null;
 var isFirstStart = true;
 var isAlreadyAwake = false;
-var timer = startSeconds*SECONDS;
+var timer;
 var firstCall;
 var lastCall;
 var wakeup;
 
-// HIGHLANDER
-async function Highlander() {
 
-    isAlreadyAwake = true;
+// HIGHLANDER
+async function Highlander() {    
 
     const now = Date.now();
     const age = now - firstCall;    
@@ -33,7 +33,7 @@ async function Highlander() {
 
         alivePort.onDisconnect.addListener( (p) => {
             if (chrome.runtime.lastError){
-                console.log(`(DEBUG Highlander) Expected disconnect error. ServiceWorker status should be still RUNNING.`);
+                //console.log(`(DEBUG Highlander) Expected disconnect error. ServiceWorker status should be still RUNNING.`);
             } else {
                 console.log(`(DEBUG Highlander): port disconnected`);
             }
@@ -49,13 +49,13 @@ async function Highlander() {
         if (chrome.runtime.lastError) {                              
             console.log(`(DEBUG Highlander): postMessage error: ${chrome.runtime.lastError.message}`)                
         } else {                               
-            console.log(`(DEBUG Highlander): "ping" sent through ${alivePort.name} port`)
+            //console.log(`(DEBUG Highlander): "ping" sent through ${alivePort.name} port`)
         }            
     }         
         
     setTimeout( () => {
         nextRound();
-    }, 600);
+    }, 100);
     
 }
 
@@ -85,8 +85,10 @@ chrome.runtime.onConnect.addListener( port => {
 
     if (isAlreadyAwake == false) {
         // Starts Highlander
-        firstCall = Date.now();
-        timer = startSeconds*SECONDS;
+        isAlreadyAwake = true;
+        firstCall = Date.now();        
+        //timer = startSeconds*SECONDS;
+        timer = 300;
         isFirstStart = true;
         wakeup = setInterval(Highlander, timer);
         console.log(`-------- >>> Highlander has been started at ${convertNoDate(Date.now())}`);
@@ -105,7 +107,7 @@ chrome.runtime.onConnect.addListener( port => {
 
     // Disconnect the port connected with content script. 
     // Connection is useless as Service Worker will continue to stay awake because of running Highlander function.
-    setTimeout(swDisconnect, 2000, port);
+    setTimeout(swDisconnect, 1000, port);
     
 });
 
